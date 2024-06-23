@@ -14,8 +14,21 @@ html, body, * {
     display: block;
     margin: 30px auto;
     list-style-type: none;
-    max-width: 300px;
+    max-width: 500px;
+    font-size: 24px;
 }
+
+#options input[type="checkbox"] {
+    width: 30px;
+    height: 20px;
+}
+
+#options select {
+    width: 150px;
+    height: 50px;
+    font-size: 16px;
+}
+
 
 #options input[type="checkbox"], #options select {
     float: right;   
