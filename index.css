@@ -1,0 +1,27 @@
+html, body, * {
+	margin: 0;
+	padding: 0;
+}
+
+
+#screen {
+    display: block;
+    margin: 10px auto;
+    background-color: #000;
+}
+
+#options {
+    display: block;
+    margin: 30px auto;
+    list-style-type: none;
+    max-width: 300px;
+}
+
+#options input[type="checkbox"], #options select {
+    float: right;   
+}
+
+#options input[type="range"] {
+    width: 50%; 
+    float: right;
+}

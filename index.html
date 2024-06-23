@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grid Options</title>
+    <link rel="stylesheet" href="index.css">
+    <script src="index.js"></script>
+</head>
+<body>
+    <ul id="options">
+        <li>Grid Size <input type="range" min="6" max="24" step="0.0001" value="9" id="gridSize"></li>
+        <li>Show Grid<input type="checkbox" id="showGrid" checked></li>
+        <li>Show Grid Values<input type="checkbox" id="showData" checked></li>
+        <li>Tint Volume<input type="checkbox" id="tintCells" checked></li>
+        <li>Volume<select id="volume">
+            <option>Sine 1D Terrain</option>
+            <option selected>Sine 2D Terrain</option>
+            <option>Circle</option>
+            <option>Square</option>
+        </select></li>
+    </ul>
+    <canvas id="screen" width="800" height="800"></canvas>
+</body>
+</html>
