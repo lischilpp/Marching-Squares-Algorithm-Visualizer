@@ -10,21 +10,20 @@ function Vector2(x, y) {
     }
 }
 
-var gridSize = 16,
-    interpolationAccuracy = 0.01,
-    voxelGrid = [],
-    showGrid = true,
-    showData = true,
-    tintCells = true,
-    volume = 'sine 2D terrain';
+const Volumes = Object.freeze({
+    sine_1d_terrain: 'Sine 1D Terrain',
+    sine_2d_terrain: 'Sine 2D Terrain',
+    circle: 'Circle',
+    square: 'Square'
+});
 
-const colors = {
+const Colors = Object.freeze({
     grid: "#fff",
     volume_flag_font_dark: "#000",
     volume_flag_font_bright: "#fff",
     volume_tint: "#1995AD",
     maching_square_border: "white",
-}
+})
 
 var line_table = [
     -1, -1, -1, -1,
@@ -44,6 +43,15 @@ var line_table = [
      0,  3, -1, -1,
     -1, -1, -1, -1
 ]
+
+var gridSize = 16,
+    interpolationAccuracy = 0.01,
+    voxelGrid = [],
+    showGrid = true,
+    showData = true,
+    tintCells = true,
+    volume = Volumes.sine_2d_terrain;
+
 
 function createGrid() {
     for (var x=0; x<gridSize; x++) {
@@ -67,15 +75,15 @@ function createCircle(pos, rad) {
 
 var getDensity = function(x, y) {
     switch(volume) {
-        case 'sine 1D terrain':
+        case Volumes.sine_1d_terrain:
             if (y > Math.sin((x/gridSize*10)) * gridSize*0.3 + gridSize*0.5)
                 return 1;
             return 0;
-        case 'sine 2D terrain':
+        case Volumes.sine_2d_terrain:
             if (y > (Math.sin((x/gridSize*10)) + Math.sin((y/gridSize*20))) * gridSize*0.3 + gridSize*0.6)
                 return 1;
             return 0;
-        case 'circle':
+        case Volumes.circle:
            var middle = new Vector2(gridSize/2, gridSize/2);
             var dist = new Vector2(x, y).distance(middle);
             var rad = gridSize / 3;
@@ -83,7 +91,7 @@ var getDensity = function(x, y) {
                 return rad - dist / rad;
             }
             return 0;
-        case 'square':
+        case Volumes.square:
             var quarter = gridSize * 0.25;
             var threeQuarters = gridSize - quarter;
             if (x > quarter && x < threeQuarters && y > quarter && y < threeQuarters)
@@ -129,7 +137,7 @@ function drawSquares() {
   	ctx.lineWidth = 16/gridSize;
     var halfUnit = unit * 0.5;
     if (showGrid) {
-        ctx.strokeStyle=colors.grid;
+        ctx.strokeStyle=Colors.grid;
         for (var x=0; x<gridSize; x++) {
             if (x != 0) {
                 ctx.beginPath();
@@ -150,12 +158,12 @@ function drawSquares() {
                 var n = (getDensity(x+0.5, y+0.5) > 0) ? 1 : 0;
                 if (n) {
                     if (tintCells) {
-                        ctx.fillStyle = colors.volume_tint;
+                        ctx.fillStyle = Colors.volume_tint;
                         ctx.fillRect(x * unit, y * unit, unit, unit);
                     }
                 }
                 if (showData) {
-                    ctx.fillStyle = n ? colors.volume_flag_font_dark : colors.volume_flag_font_bright;
+                    ctx.fillStyle = n ? Colors.volume_flag_font_dark : Colors.volume_flag_font_bright;
                     ctx.fillText(n, x * unit + halfUnit - halfFontSize * 0.5 , y * unit + halfUnit + halfFontSize);
                 }
             }
@@ -173,7 +181,7 @@ function drawEdgeLines(start, end) {
 
 function marcheSquares() {
     ctx.beginPath();
-    ctx.strokeStyle = colors.maching_square_border;
+    ctx.strokeStyle = Colors.maching_square_border;
   	ctx.lineWidth = 4;
     for (var x=0; x<gridSize; x++) {
         for (var y=0; y<gridSize; y++) {
