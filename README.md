@@ -10,6 +10,7 @@
   <p><a href="https://lischilpp.github.io/marching-squares-algorithm-visualizer/">Live Demo</a></p>
 </div>
 
+## About The Project
 The marching cubes algorithm is a technique in Computer Graphics used to generate triangles that form smooth surfaces from 3D volume density values. Its 2D counterpart, the marching squares algorithm, operates similarly but on 2D scalar fields.
 
 This tool offers an interactive visualization of the marching squares algorithm applied to various volume functions and grid sizes. It is designed to help you gain a deeper understanding of the algorithm through hands-on exploration.
